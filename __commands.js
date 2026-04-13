@@ -1,4 +1,5 @@
 import { EmbedBuilder, ButtonBuilder, SlashCommandBuilder } from "@discordjs/builders";
+import { MessageFlags } from "discord.js";
 
 const commandsStorage = {
     commands: [
@@ -16,7 +17,7 @@ const commandsStorage = {
             .toJSON(),
 
             async execute(interaction) {
-                
+                await (interaction).reply({content: 'yes', flags: MessageFlags.Ephemeral});
             },
         }
     ],
