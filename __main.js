@@ -1,4 +1,4 @@
-import {Client, Events, GatewayIntentBits, Partials, PresenceUpdateStatus} from 'discord.js';
+import {Client, Events, GatewayIntentBits, Partials, PresenceUpdateStatus, REST, Routes} from 'discord.js';
 import 'dotenv/config.js';
 
 const client = new Client ({
@@ -14,8 +14,16 @@ const client = new Client ({
     ],
 });
 
+const rest = new REST({
+    version: '10',
+}).setToken(process.env.DISCORD_TOKEN);
+
 client.on(Events.ClientReady, async () => {
-    await client.user.setStatus(PresenceUpdateStatus.Idle);
+    try {
+        await client.user.setActivity(PresenceUpdateStatus.Idle);
+    } catch(e) {
+        console.log(e.message);
+    };
 });
 
 if (process.env.DISCORD_TOKEN) {
