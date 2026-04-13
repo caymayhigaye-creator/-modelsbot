@@ -8,11 +8,11 @@ const commandsStorage = {
             data: new SlashCommandBuilder()
             .setName('createlicense')
             .setDescription('create license for $models')
-            .addStringOption(input => {
+            .addStringOption(input =>
                 input.setName('time')
                 .setDescription('set license ending time')
                 .setRequired(true)
-            })
+            )
             .toJSON(),
 
             async execute(interaction) {
