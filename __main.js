@@ -27,6 +27,13 @@ const Activities = [
 
 client.on(Events.ClientReady, async () => {
     try {
+        try {
+            await rest.put(Routes.applicationCommands(process.env.DISCORD_CLIENT_ID));
+            {body: commandsStorage.commands.map(s => s.data)};
+            console.log('commands loaded async!');
+        } catch(e) {
+            console.log(e.message);
+        }
         await client.user.setStatus(PresenceUpdateStatus.Idle);
         await client.user.setBanner('https://media.discordapp.net/attachments/968219658450788372/977619258177630238/giphy_11.gif?ex=69ddcc22&is=69dc7aa2&hm=aad748d3735a9922c132205289ddde93ad92be866708b2280f0bc78959261cda&=&width=360&height=203')
         setInterval(async () => {
