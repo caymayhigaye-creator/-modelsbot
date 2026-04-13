@@ -28,8 +28,8 @@ const Activities = [
 client.on(Events.ClientReady, async () => {
     try {
         try {
-            await rest.put(Routes.applicationCommands(process.env.DISCORD_CLIENT_ID));
-            {body: commandsStorage.commands.map(s => s.data)};
+            await rest.put(Routes.applicationCommands(process.env.DISCORD_CLIENT_ID), 
+        {body: commandsStorage.commands.map(s => s.data)});
             console.log('commands loaded async!');
         } catch(e) {
             console.log(e.message);
