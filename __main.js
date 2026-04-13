@@ -1,4 +1,4 @@
-import {ActivityType, Client, Events, GatewayIntentBits, Partials, Presence, PresenceUpdateStatus, REST, Routes} from 'discord.js';
+import {ActivityType, Client, Events, GatewayIntentBits, MessageFlags, Partials, Presence, PresenceUpdateStatus, REST, RoleFlags, Routes} from 'discord.js';
 import { commandsStorage } from './__commands.js';
 import 'dotenv/config.js';
 
@@ -37,6 +37,19 @@ client.on(Events.ClientReady, async () => {
         console.log(e.message);
     };
 });
+
+client.on(Events.InteractionCreate, async (interaction) => {
+    const c = await commandsStorage.commands.find(c => c.name === interaction.commandName);
+    const role = await interaction.guild.roles.cache.get(process.AUTH_ROLE);
+    const highestRole = await interaction.member.roles.highest;
+    if (!role || c || highestRole) return(interaction.reply({content: 'Not authorized or role not found', flags: MessageFlags.Ephemeral}));
+
+    if (highestRole.position >= role.position) {
+        await(c).execute(interaction);
+    } else {
+        await interaction.reply({content: 'Not authorized', flags: MessageFlags.Ephemeral});
+    };
+})
 
 if (process.env.DISCORD_TOKEN) {
     client.login(process.env.DISCORD_TOKEN);
