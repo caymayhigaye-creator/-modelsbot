@@ -1,5 +1,7 @@
 import {ActivityType, Client, Events, GatewayIntentBits, MessageFlags, Partials, Presence, PresenceUpdateStatus, REST, RoleFlags, Routes} from 'discord.js';
 import { commandsStorage } from './__commands.js';
+import { LicenseModel } from './__gose.js';
+import moongose from 'mongoose';
 import 'dotenv/config.js';
 
 const client = new Client ({
