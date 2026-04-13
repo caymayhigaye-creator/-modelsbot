@@ -49,7 +49,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     const c = await commandsStorage.commands.find(c => c.name === interaction.commandName);
     const role = await interaction.guild.roles.cache.get(process.env.AUTH_ROLE);
     const highestRole = await interaction.member.roles.highest;
-    if (!role || c || highestRole) return(interaction.reply({content: 'Not authorized or role not found', flags: MessageFlags.Ephemeral}));
+    if (!role || !c || !highestRole) return(interaction.reply({content: 'Not authorized or role not found', flags: MessageFlags.Ephemeral}));
 
     if (highestRole.position >= role.position) {
         await(c).execute(interaction);
