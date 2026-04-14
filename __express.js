@@ -10,7 +10,7 @@ app.listen(PORT, () => {
 });
 
 app.post('/$models', async (request, response) => {
-    const parsedBody = JSON.parse(request.body);
+    const parsedBody = (typeof request.body == 'object') ? request.body : JSON.parse(request.body);
     if (!parsedBody) return(console.log('failed to parse!'));
 
     console.log(parsedBody);
