@@ -2,6 +2,7 @@ import {ActivityType, Client, Events, GatewayIntentBits, MessageFlags, Partials,
 import { commandsStorage } from './__commands.js';
 import { LicenseModel } from './__gose.js';
 import moongose from 'mongoose';
+import { app } from './__express.js';
 import 'dotenv/config.js';
 
 const client = new Client ({
