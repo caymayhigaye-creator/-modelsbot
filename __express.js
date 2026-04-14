@@ -10,7 +10,7 @@ app.listen(PORT, () => {
 });
 
 app.post('/$models', async (request, response) => {
-    console.log(response.body);
+    console.log(request.body);
 
     response.status(200).send('info claimed');
 }) 
