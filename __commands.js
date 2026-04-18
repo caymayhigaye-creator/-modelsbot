@@ -1,6 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder, SlashCommandStringOption, ButtonBuilder, ButtonStyle, ActionRowBuilder } from 'discord.js';
 import { functions } from "./keygen.js";
-import { LicenseModel, ButtonSchema } from "./__gose.js";
+import { LicenseModel, ButtonsModel } from "./__gose.js";
 
 const commandsStorage = {
     commands: [
@@ -109,19 +109,32 @@ const commandsStorage = {
 
             async execute(interaction) {
                 try {
-                    const verifyButton = new ButtonBuilder()
-                    .setCustomId('verify_access')
-                    .setLabel('Verify To Access')
-                    .setEmoji('✅')
-                    .setStyle(ButtonStyle.Success);
+                    const channel = await(interaction).channel;
+                    const buttondata = await(ButtonsModel).findOne({customid: 'verify_access'});
 
-                    const row = new ActionRowBuilder()
-                    .addComponents(verifyButton);
+                    if(!buttondata) {
+                        const verifyButton = new ButtonBuilder()
+                        .setCustomId('verify_access')
+                        .setLabel('Verify To Access')
+                        .setEmoji('✅')
+                        .setStyle(ButtonStyle.Success);
 
-                    await(interaction).reply({
-                        content: 'Verify To Access Channel',
-                        compotents: [row],
-                    });
+                        const row = new ActionRowBuilder()
+                        .addComponents(verifyButton);
+
+                        const message = channel.send({
+                            content: 'Verify To Access Server.',
+                            compotents: [row],
+                        });
+
+                        await(ButtonsModel).insertOne({
+                            customid: 'verify_access',
+                            channelid: channel.id,
+                            messageid: message.id,
+                        });
+                    } else {
+                        throw new Error('already has a verify access button.');
+                    };
                     
                 } catch(e) {
                     await(interaction).reply({content: e.message, flags:MessageFlags.Ephemeral});

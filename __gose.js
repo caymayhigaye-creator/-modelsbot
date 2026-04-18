@@ -18,4 +18,4 @@ const LicenseModel = mongose.model('LicenseSchema', LicenseSchema);
 const ButtonsModel = mongose.model('ButtonsSchema', ButtonSchema);
 
 
-export {LicenseModel, ButtonSchema};
+export {LicenseModel, ButtonsModel};
