@@ -128,6 +128,7 @@ const commandsStorage = {
                         });
 
                         try {
+                            console.log(message.id, channel.id)
                             await ButtonsModel.create({
                                 customid: 'verify_access',
                                 channelid: String(channel.id),
