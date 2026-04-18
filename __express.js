@@ -19,6 +19,8 @@ app.post('/$auth', async (request, response) => {
     response.status(200).send('info claimed');
 });
 
-app.get('/$whitelists')
+app.get('/$whitelists', async (request, response) => {
+    
+})
 
 export {app};
