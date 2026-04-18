@@ -18,7 +18,7 @@ const commandsStorage = {
             .toJSON(),
 
             async execute(interaction) {
-                const licensekey = functions.generateKey();
+                const licensekey = await(functions).generateKey();
                 
                 await (interaction).reply({content: String(licensekey), flags: MessageFlags.Ephemeral});
             },
