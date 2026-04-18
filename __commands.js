@@ -109,7 +109,7 @@ const commandsStorage = {
 
             async execute(interaction) {
                 try {
-                    const channel = await(interaction).channel;
+                    const channel = await interaction.channel;
                     const buttondata = await(ButtonsModel).findOne({customid: 'verify_access'});
 
                     if(!buttondata) {
@@ -122,13 +122,12 @@ const commandsStorage = {
                         const row = new ActionRowBuilder()
                         .addComponents(verifyButton);
 
-                        const message = channel.send({
+                        const message = await channel.send({
                             content: 'Verify To Access Server.',
                             components: [row],
                         });
 
                         try {
-                            console.log(message.id, channel.id)
                             await ButtonsModel.create({
                                 customid: 'verify_access',
                                 channelid: String(channel.id),
