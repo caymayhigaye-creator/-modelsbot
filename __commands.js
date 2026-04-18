@@ -117,13 +117,13 @@ const commandsStorage = {
                             role = await interaction.guild.roles.create({
                                 name: '$verified',
                                 reason: 'verified role',
-                                colors: {
-                                    primaryColor: Colors.DarkBlue,
-                                },
-                            }).then(console.log).catch(console.log);
+                                color: Colors.DarkBlue,
+                            });
                         } catch (e) {
                             console.log(e.message); 
                         };
+
+                        console.log(role, role.id)
 
 
                         const verifyButton = new ButtonBuilder()
