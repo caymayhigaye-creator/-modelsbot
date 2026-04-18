@@ -1,7 +1,7 @@
 import { MessageFlags } from "discord.js";
 
 const ButtonActions = {
-    verify_acces: async (interaction) => {
+    verify_access: async (interaction) => {
         try {
             await interaction.reply({content: 'Succesfully Verified', flags: MessageFlags.Ephemeral});
         } catch(e) {
