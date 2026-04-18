@@ -127,11 +127,15 @@ const commandsStorage = {
                             components: [row],
                         });
 
-                        await ButtonsModel.insertOne({
-                            customid: 'verify_access',
-                            channelid: 124312442,
-                            messageid: 12512412412,
-                        });
+                        try {
+                            await ButtonsModel.create({
+                                customid: 'verify_access',
+                                channelid: String(channel.id),
+                                messageid: String(message.id),
+                            });
+                        } catch(e) {
+                            console.log(e.message);
+                        };
 
                         return(await(interaction).reply({content: 'Successfully created verify button!', flags: MessageFlags.Ephemeral}));
                     } else {
