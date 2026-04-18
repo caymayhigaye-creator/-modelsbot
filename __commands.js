@@ -1,4 +1,4 @@
-import { EmbedBuilder, SlashCommandBuilder, SlashCommandStringOption, ButtonBuilder, ButtonStyle, ActionRowBuilder } from 'discord.js';
+import { EmbedBuilder, SlashCommandBuilder, SlashCommandStringOption, ButtonBuilder, ButtonStyle, ActionRowBuilder, MessageFlags } from 'discord.js';
 import { functions } from "./keygen.js";
 import { LicenseModel, ButtonsModel } from "./__gose.js";
 
@@ -129,9 +129,11 @@ const commandsStorage = {
 
                         await(ButtonsModel).insertOne({
                             customid: 'verify_access',
-                            channelid: channel.id,
-                            messageid: message.id,
+                            channelid: 124312442,
+                            messageid: 12512412412,
                         });
+
+                        return(await(interaction).reply({content: 'Successfully created verify button!', flags: MessageFlags.Ephemeral}));
                     } else {
                         throw new Error('already has a verify access button.');
                     };
