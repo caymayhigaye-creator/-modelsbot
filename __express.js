@@ -1,5 +1,5 @@
 import express from "express";
-import { LicenseModel } from "./__gose";
+import { LicenseModel } from "./__gose.js";
 
 const app = express();
 app.use(express.json());
