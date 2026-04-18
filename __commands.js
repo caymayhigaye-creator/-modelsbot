@@ -124,7 +124,7 @@ const commandsStorage = {
 
                         const message = channel.send({
                             content: 'Verify To Access Server.',
-                            compotents: [row],
+                            components: [row],
                         });
 
                         await(ButtonsModel).insertOne({
