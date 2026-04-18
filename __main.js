@@ -1,9 +1,10 @@
 import {ActivityType, Client, Events, GatewayIntentBits, MessageFlags, Partials, Presence, PresenceUpdateStatus, REST, RoleFlags, Routes} from 'discord.js';
 import { commandsStorage } from './__commands.js';
-import { LicenseModel } from './__gose.js';
+import { ButtonsModel, LicenseModel } from './__gose.js';
 import moongose from 'mongoose';
 import { app } from './__express.js';
 import 'dotenv/config.js';
+import { ButtonActions } from './ButtonActions.js';
 
 const client = new Client ({
     intents: [
@@ -61,8 +62,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
             await interaction.reply({content: 'Not authorized', flags: MessageFlags.Ephemeral});
         };
     } else if(interaction.isButton()) {
-
-    }
+        const buttondata = await ButtonsModel.findOne({customid: await interaction.customId});
+        if(buttondata) {
+            if(ButtonActions[buttondata.customid]) {
+                await ButtonActions[buttondata.customid](interaction);
+            };
+        };
+    };
 })
 
 if (process.env.DISCORD_TOKEN) {
