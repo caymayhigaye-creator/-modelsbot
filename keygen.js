@@ -16,6 +16,7 @@ const functions = {
 
         return keyParts.join('-');
     },
-},
+};
+
 
 export {functions}
