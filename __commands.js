@@ -127,7 +127,7 @@ const commandsStorage = {
                             components: [row],
                         });
 
-                        await(ButtonsModel).insertOne({
+                        await ButtonsModel.insertOne({
                             customid: 'verify_access',
                             channelid: 124312442,
                             messageid: 12512412412,
