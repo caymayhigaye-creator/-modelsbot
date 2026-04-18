@@ -1,4 +1,4 @@
-import { EmbedBuilder, SlashCommandBuilder, SlashCommandStringOption, ButtonBuilder, ButtonStyle, ActionRowBuilder, MessageFlags } from 'discord.js';
+import { EmbedBuilder, SlashCommandBuilder, SlashCommandStringOption, ButtonBuilder, ButtonStyle, ActionRowBuilder, MessageFlags, Colors } from 'discord.js';
 import { functions } from "./keygen.js";
 import { LicenseModel, ButtonsModel } from "./__gose.js";
 
@@ -111,8 +111,21 @@ const commandsStorage = {
                 try {
                     const channel = await interaction.channel;
                     const buttondata = await(ButtonsModel).findOne({customid: 'verify_access'});
-
                     if(!buttondata) {
+                        let role;
+                        try { // ROLE BUILDER //
+                            role = await interaction.guild.roles.create({
+                                name: '$verified',
+                                reason: 'verified role',
+                                colors: {
+                                    primaryColor: Colors.DarkBlue,
+                                },
+                            }).then(console.log).catch(console.log);
+                        } catch (e) {
+                            console.log(e.message); 
+                        };
+
+
                         const verifyButton = new ButtonBuilder()
                         .setCustomId('verify_access')
                         .setLabel('Verify To Access')
@@ -132,6 +145,7 @@ const commandsStorage = {
                                 customid: 'verify_access',
                                 channelid: String(channel.id),
                                 messageid: String(message.id),
+                                roleid: role.id || undefined,
                             });
                         } catch(e) {
                             console.log(e.message);
