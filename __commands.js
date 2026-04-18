@@ -63,6 +63,40 @@ const commandsStorage = {
                 }
             },
         },
+        {
+            name: 'removelicense',
+
+            data: new SlashCommandBuilder()
+            .setName('removelicense')
+            .setDescription('removes saved license key!')
+            .addStringOption(option =>
+                option.setName('license')
+                .setDescription('license key')
+                .setRequired(true)
+            )
+            .toJSON(),
+
+            async execute(interaction) {
+                const license = interaction.options.getString('license');
+
+                try {
+                    const licensedata = await(LicenseModel).findOne({ key:license });
+
+                    if(licensedata){
+                        const result = await(LicenseModel).findOneAndDelete({key:license});
+                        if(result){
+                            return(await(interaction).reply({content: 'license key deleted succesfully', flags:MessageFlags.Ephemeral}));
+                        } else {
+                            return(await(interaction).reply({content: 'something went wrong with deleting the license key!', flags:MessageFlags.Ephemeral}));
+                        };
+                    } else {
+                        throw new Error(`cant find ${license} given key.`);
+                    };
+                } catch(e) {
+                    return(await(interaction).reply({content: e.message, flags: MessageFlags.Ephemeral}));
+                };
+            },
+        },
     ],
 };
 
