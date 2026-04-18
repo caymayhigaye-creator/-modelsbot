@@ -123,8 +123,6 @@ const commandsStorage = {
                             console.log(e.message); 
                         };
 
-                        console.log(role, role.id)
-
 
                         const verifyButton = new ButtonBuilder()
                         .setCustomId('verify_access')
