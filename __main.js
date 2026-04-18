@@ -62,6 +62,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             await interaction.reply({content: 'Not authorized', flags: MessageFlags.Ephemeral});
         };
     } else if(interaction.isButton()) {
+        console.log(await interaction.customId)
         const buttondata = await ButtonsModel.findOne({customid: await interaction.customId});
         if(buttondata) {
             if(ButtonActions[buttondata.customid]) {
