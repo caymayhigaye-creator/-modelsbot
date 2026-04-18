@@ -54,7 +54,7 @@ const commandsStorage = {
                             date: new Date(Date.now + Number(days) * 24 * 60 * 60 * 1000),
                         });
 
-                        return(await(interaction).reply({content: `license key saved ${String(days)} days!`}));
+                        return(await(interaction).reply({content: `license key saved ${String(days)} days!`, flags:MessageFlags.Ephemeral}));
                     } else {
                         throw new Error('already registered key with this license!');
                     }
