@@ -1,7 +1,7 @@
-import { EmbedBuilder, ButtonBuilder, SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
+import { EmbedBuilder, ButtonBuilder, SlashCommandBuilder, SlashCommandStringOption, ButtonBuilder, ButtonStyle, ActionRowBuilder } from 'discord.js';
 import { InteractionResponse, MessageFlags } from "discord.js";
 import { functions } from "./keygen.js";
-import { LicenseModel } from "./__gose.js";
+import { LicenseModel, ButtonSchema } from "./__gose.js";
 
 const commandsStorage = {
     commands: [
@@ -60,9 +60,10 @@ const commandsStorage = {
                     }
                 } catch(e) {
                     await(interaction).reply({content: e.message, flags: MessageFlags.Ephemeral});
-                }
+                };
             },
         },
+        // REMOVE LICENSE COMMAND //
         {
             name: 'removelicense',
 
@@ -95,6 +96,37 @@ const commandsStorage = {
                 } catch(e) {
                     return(await(interaction).reply({content: e.message, flags: MessageFlags.Ephemeral}));
                 };
+            },
+        },
+        // STEPVERIFICATION COMMAND //
+        
+        {
+            name: 'verifybuilder',
+
+            data: new SlashCommandBuilder()
+            .setName('verifybuilder')
+            .setDescription('verify button builder')
+            .toJSON(),
+
+            async execute(interaction) {
+                try {
+                    const verifyButton = new ButtonBuilder()
+                    .setCustomId('verify_access')
+                    .setLabel('Verify To Access')
+                    .setEmoji('✅')
+                    .setStyle(ButtonStyle.Success);
+
+                    const row = new ActionRowBuilder()
+                    .addComponents(verifyButton);
+
+                    await(interaction).reply({
+                        content: 'Verify To Access Channel',
+                        compotents: [row],
+                    });
+                    
+                } catch(e) {
+                    await(interaction).reply({content: e.message, flags:MessageFlags.Ephemeral});
+                }
             },
         },
     ],
