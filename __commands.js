@@ -20,7 +20,7 @@ const commandsStorage = {
             async execute(interaction) {
                 const licensekey = functions.generateKey();
                 
-                await (interaction).reply({content: licensekey, flags: MessageFlags.Ephemeral});
+                await (interaction).reply({content: String(licensekey), flags: MessageFlags.Ephemeral});
             },
         }
     ],
