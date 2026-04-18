@@ -1,5 +1,6 @@
 import { EmbedBuilder, ButtonBuilder, SlashCommandBuilder } from "@discordjs/builders";
 import { MessageFlags } from "discord.js";
+import { functions } from "./keygen.js";
 
 const commandsStorage = {
     commands: [
@@ -9,15 +10,17 @@ const commandsStorage = {
             data: new SlashCommandBuilder()
             .setName('createlicense')
             .setDescription('create license for $models')
-            .addStringOption(input =>
-                input.setName('time')
-                .setDescription('set license ending time')
+            .addNumberOption(option => 
+                option.setName('days')
+                .setDescription('license expire date day time')
                 .setRequired(true)
             )
             .toJSON(),
 
             async execute(interaction) {
-                await (interaction).reply({content: 'yes', flags: MessageFlags.Ephemeral});
+                const licensekey = functions.generateKey();
+                
+                await (interaction).reply({content: licensekey, flags: MessageFlags.Ephemeral});
             },
         }
     ],

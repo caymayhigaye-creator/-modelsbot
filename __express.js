@@ -1,4 +1,5 @@
 import express from "express";
+import { LicenseModel } from "./__gose";
 
 const app = express();
 app.use(express.json());
@@ -9,13 +10,15 @@ app.listen(PORT, () => {
     console.log('3000 Port is working rn');
 });
 
-app.post('/$models', async (request, response) => {
+app.post('/$auth', async (request, response) => {
     const parsedBody = (typeof request.body == 'object') ? request.body : JSON.parse(request.body);
     if (!parsedBody) return(console.log('failed to parse!'));
 
     console.log(parsedBody);
 
     response.status(200).send('info claimed');
-}) 
+});
+
+app.get('/$whitelists')
 
 export {app};
