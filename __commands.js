@@ -1,4 +1,4 @@
-import { EmbedBuilder, ButtonBuilder, SlashCommandBuilder, SlashCommandStringOption, ButtonBuilder, ButtonStyle, ActionRowBuilder } from 'discord.js';
+import { EmbedBuilder, SlashCommandBuilder, SlashCommandStringOption, ButtonBuilder, ButtonStyle, ActionRowBuilder } from 'discord.js';
 import { functions } from "./keygen.js";
 import { LicenseModel, ButtonSchema } from "./__gose.js";
 
