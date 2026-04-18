@@ -11,7 +11,7 @@ const LicenseSchema = new mongose.Schema({}, {
     strict: false,
 });
 const ButtonSchema = new mongose.Schema({}, {
-    strict: true,
+    strict: false,
 });
 
 const LicenseModel = mongose.model('LicenseSchema', LicenseSchema);
