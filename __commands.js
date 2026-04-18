@@ -143,9 +143,9 @@ const commandsStorage = {
                         try {
                             await ButtonsModel.create({
                                 customid: 'verify_access',
-                                channelid: String(await channel.id),
-                                messageid: String(await message.id),
-                                roleid: String(await role.id) || undefined,
+                                channelid: String(channel.id),
+                                messageid: String(message.id),
+                                roleid: String(role.id) || undefined,
                             });
                         } catch(e) {
                             console.log(e.message);
