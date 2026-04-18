@@ -1,5 +1,5 @@
 import { MessageFlags } from "discord.js";
-import { ButtonsModel } from "./__gose";
+import { ButtonsModel } from "./__gose.js";
 
 const ButtonActions = {
     verify_access: async (interaction) => {
