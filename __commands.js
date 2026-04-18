@@ -42,8 +42,8 @@ const commandsStorage = {
             ).toJSON(),
 
             async execute(interaction) {
-                const license = await(interaction).options.getStringOption('license');
-                const days = await(interaction).options.getNumberOption('days');
+                const license = await(interaction).options.getString('license');
+                const days = await(interaction).options.getNumber('days');
 
                 try {
                     const savedLicense = await(LicenseModel).findOne({key: license});
