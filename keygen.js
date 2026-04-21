@@ -1,8 +1,8 @@
 const functions = {
     async generateKey() {
         const charset = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
-        const segmentLength = 5;
-        const segments = 5; 
+        const segmentLength = 15;
+        const segments = 15; 
         let keyParts = [];
 
         for (let i = 0; i < segments; i++) {
