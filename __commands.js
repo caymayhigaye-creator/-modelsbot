@@ -34,6 +34,11 @@ const commandsStorage = {
                 .setDescription('put giv3n license')
                 .setRequired(true)
             )
+            .addStringOption(option => 
+                option.setName('model')
+                .setDescription('x model license key')
+                .setRequired(true)
+            )
             .addNumberOption(option => 
                 option.setName('days')
                 .setDescription('add license key expiration day time')
@@ -42,15 +47,17 @@ const commandsStorage = {
 
             async execute(interaction) {
                 const license = await(interaction).options.getString('license');
+                const model = await(interaction).options.getString('model');
                 const days = await(interaction).options.getNumber('days');
 
                 try {
-                    const savedLicense = await(LicenseModel).findOne({key: license});
+                    const savedLicense = await(LicenseModel).findOne({key: license, model: model});
 
                     if(!savedLicense) {
                         await(LicenseModel).insertOne({
                             key: license,
                             date: new Date(Date.now + Number(days) * 24 * 60 * 60 * 1000),
+                            model: model,
                         });
 
                         return(await(interaction).reply({content: `license key saved ${String(days)} days!`, flags:MessageFlags.Ephemeral}));
