@@ -55,7 +55,7 @@ const commandsStorage = {
 
                     if(!savedLicense) {
                         await(LicenseModel).insertOne({
-                            key: license,
+                            license: license,
                             date: new Date(Date.now + Number(days) * 24 * 60 * 60 * 1000),
                             model: model,
                         });
