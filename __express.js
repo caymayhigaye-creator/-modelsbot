@@ -12,8 +12,18 @@ app.listen(PORT, () => {
 
 app.post('/$auth', async (request, response) => {
     const body = request.body;
-    const {Model, License} = body;
-    if(!Model || !License) return(response.status(404).send('Failed'));
+    const {model, license} = body;
+    if(!model || !license) return(response.status(403).send('Failed'));
+
+    const ModelData = await LicenseModel.findOne({license: license, model: model});
+    if(ModelData) {
+        return(await response.status(202).json({
+            model: model,
+            license: license,
+        }));
+    } else {
+        response.status(404).send('Not Found');
+    };
 
     response.status(200).send('info claimed');
 });
