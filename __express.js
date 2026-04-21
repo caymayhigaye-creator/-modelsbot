@@ -11,10 +11,9 @@ app.listen(PORT, () => {
 });
 
 app.post('/$auth', async (request, response) => {
-    const parsedBody = (typeof request.body == 'object') ? request.body : JSON.parse(request.body);
-    if (!parsedBody) return(console.log('failed to parse!'));
-
-    console.log(parsedBody);
+    const body = request.body;
+    const {Model, License} = body;
+    if(!Model || !License) return(response.status(404).send('Failed'));
 
     response.status(200).send('info claimed');
 });
